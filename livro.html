@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Capa do Livro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      width: 390px;
+      height: 844px;
+      background: #ffeef2;
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .capa {
+      width: 100%;
+      height: 100%;
+      background: url('/fotos/giulia1\ \(2\).jpeg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    .capa::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(255, 240, 245, 0.75);
+      z-index: 1;
+    }
+
+    .mensagem {
+      position: relative;
+      z-index: 2;
+      color: #a02c56;
+      font-size: 26px;
+      font-weight: 600;
+      padding: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(3px);
+    }
+
+    .botao {
+      position: relative;
+      z-index: 2;
+      margin-top: 30px;
+      font-size: 18px;
+      padding: 12px 30px;
+      background: #d6336c;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+
+    .botao:hover {
+      background: #b22557;
+    }
+  </style>
+</head>
+<body>
+  <div class="capa">
+    <div class="mensagem">
+      Amor, <br>
+      pronta pra nossa história?
+    </div>
+    <a class="botao" href="amor.html">Começar 💖</a>
+  </div>
+</body>
+</html>

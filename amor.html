@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livro de Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, #fff0f5, #ffe4e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden; /* Remove a barra de rolagem horizontal */
+    }
+
+    .book {
+      width: 100%; /* Largura ocupando 100% da tela */
+      height: 100%; /* Altura ocupando 100% da tela */
+      max-width: 340px; /* Max-width para garantir que o livro não ultrapasse a largura */
+      max-height: 600px; /* Limita a altura do livro */
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+      touch-action: pan-y;
+    }
+
+    .pages-wrapper {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #fffafa, #fff);
+      padding: 30px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      color: #aa3d6a;
+      position: relative;
+    }
+
+    .page h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #d6336c;
+    }
+
+    .page p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #7b2e53;
+    }
+
+    .instruction {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      color: #d16b86;
+      animation: fadeIn 2s ease infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+
+    /* CARD COM CORAÇÃO ANIMADO */
+    .animated-heart {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      width: 100px;
+      height: 90px;
+      transform: translateX(-50%);
+      background-color: rgba(255, 105, 180, 0.3);
+      animation: heartFloat 6s ease-in-out infinite;
+      z-index: 0;
+      clip-path: path("M50 15 C50 -5, 90 -5, 90 25 C90 45, 50 70, 50 90 C50 70, 10 45, 10 25 C10 -5, 50 -5, 50 15 Z");
+    }
+
+    @keyframes heartFloat {
+      0% {
+        bottom: -100px;
+        opacity: 0;
+      }
+      30% {
+        opacity: 0.4;
+      }
+      60% {
+        opacity: 0.7;
+      }
+      100% {
+        bottom: 110%;
+        opacity: 0;
+      }
+    }
+
+    .animated-heart h2,
+    .animated-heart p {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="book" id="book">
+    <div class="pages-wrapper" id="pagesWrapper">
+      <div class="page">
+        <h2>Amor</h2>
+        <p>
+          Eu sempre quis um amor assim.. leve e verdadeiro. <br><br>
+          Ao passa dos dias você foi me mostrando como é bom amar e ser amado. <br><br>
+          Onde puder conhecer o seu lado mais lindo e fofo que pouco gente conhece
+        </p>
+      </div>
+
+      <div class="page">
+        <h2>Meu amor</h2>
+        <p>
+         Sempre tive muito orgulho de você! cada dia que passa eu percebo que você me achou na hora certa. Onde não estava prcurando ninguém, e achei você, toda maluca e doidinha.  
+        </p>
+      </div>
+
+      <div class="page">
+        <h2>Meu amor</h2>
+        <p>
+        Você se esforça muito pra fazer as coisas pra mim, e eu amor isso! as cartinhas eu acho tão fofas e lindas. Espero conseguir retribuir isso com todo amor e carinho que sinto por você.
+        </p>
+      </div>
+
+      <div class="page">
+        <h2>Garotinha</h2>
+        <p>
+          Eu não sei o futuro, mas sei que agora...<br>
+          Não quero mais imaginar a vida sem você.
+        </p>
+      </div>
+
+      <div class="page">
+        <h2> <br><br> 
+        EU TE AMO MUITO!!!</h2>
+      </div>
+
+      <!-- NOVO CARD COM ANIMAÇÃO DE CORAÇÃO -->
+      <div class="page animated-heart">
+        <h2>Você é meu coração</h2>
+        <p>
+          Cada pedacinho seu faz meu coração bater mais forte. <br><br>
+          Te amo mais do que palavras podem explicar. ❤️
+        </p>
+        <div class="heart"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instruction"> <h2>Arrasta pro lado 💞 </h2>  </div>
+
+  <script>
+    const wrapper = document.getElementById('pagesWrapper');
+    let startX = 0;
+    let currentTranslate = 0;
+    let currentIndex = 0;
+
+    const totalPages = wrapper.children.length;
+
+    const setTranslate = (index) => {
+      currentTranslate = index * -100; /* Ajuste para a largura total */
+      wrapper.style.transform = `translateX(${currentTranslate}%)`; /* Usando % para garantir flexibilidade */
+    };
+
+    document.getElementById('book').addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    document.getElementById('book').addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const deltaX = endX - startX;
+
+      if (deltaX < -50 && currentIndex < totalPages - 1) {
+        currentIndex++;
+      } else if (deltaX > 50 && currentIndex > 0) {
+        currentIndex--;
+      }
+
+      setTranslate(currentIndex);
+    });
+  </script>
+</body>
+</html>
